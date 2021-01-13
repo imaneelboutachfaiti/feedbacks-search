@@ -12,14 +12,15 @@ function App() {
       <div>
         <Input placeholder="Search here!"></Input>
       </div>
-      <div className="feedback-element table-space">
-        <span>Rating</span>
-        <span>Comment</span>
-        <span>browser</span>
-      </div>
-      <div className="advanced-table">
+      <table className="table-space items">
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>platform</th>
+        <th>Browser</th>
+        <th>Device</th>
+      </table>
+      
         <FetchFeedbacksData />
-      </div>
     </div>
   );
 }

@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { isMobile } from "./FeedBacksData";
+
 interface feedbacks {
   rating: number;
   comment: string;
   device: string;
   platform: string;
+  computed_browser: computed_browser;
   browser: browser;
 }
+interface computed_browser {
+  Platform: string;
+  Browser: string;
+  Version: string;
+}
 interface browser {
-  appCodeName: string;
+  userAgent: string;
 }
 
 const FetchFeedbacksData = () => {
@@ -24,11 +32,17 @@ const FetchFeedbacksData = () => {
   };
 
   const listItems = feedbackData.map((feedback) => (
-    <div className="feedback-element">
-      <span>{feedback.rating}</span>
-      <span>{feedback.comment}</span>
-      <span>{feedback.browser.appCodeName}</span>
-    </div>
+    <tr className="table-space">
+      <td>{feedback.rating}</td>
+      <td>{feedback.comment}</td>
+      <td>{feedback.computed_browser.Platform}</td>
+      <td>
+        {feedback.computed_browser.Browser +
+          " " +
+          feedback.computed_browser.Version}
+      </td>
+      <td>{isMobile(feedback.browser.userAgent) ? "Mobile" : "Desktop"}</td>
+    </tr>
   ));
   return <div>{listItems}</div>;
 };
