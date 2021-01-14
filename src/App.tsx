@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 import Input from "./Components/Input/Input";
 import Header from "./Components/Header/Header";
-import FetchFeedbacksData from './Components/Data/FetchFeedbacksData'
-
 
 function App() {
   return (
@@ -13,14 +11,17 @@ function App() {
         <Input placeholder="Search here!"></Input>
       </div>
       <table className="table-space items">
-        <th>Rating</th>
-        <th>Comment</th>
-        <th>platform</th>
-        <th>Browser</th>
-        <th>Device</th>
+        <tr>
+          <th>Rating</th>
+          <th>Comment</th>
+          <th>platform</th>
+          <th>Browser</th>
+          <th>Device</th>
+        </tr>
+        <tbody>
+         
+        </tbody>
       </table>
-      
-        <FetchFeedbacksData />
     </div>
   );
 }
