@@ -26,6 +26,10 @@
   column-gap: 30px;
 }
 
+.filter-section {
+margin-bottom: 30px;
+}
+
 .items {
   font-size: 24px;
 }

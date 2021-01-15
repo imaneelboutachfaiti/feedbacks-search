@@ -4,13 +4,14 @@ import FetchFeedbacksData from "../Data/FetchFeedbacksData";
 
 interface Props {
   placeholder?: string;
+  onChange: (value: '' | string) => void
 }
 
 const Input: FC<Props> = (props) => {
-  const [criteria, setCriteria] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCriteria(e.target.value);
+    props.onChange(e.target.value);
   };
+
   return (
     <div>
       <input
@@ -18,7 +19,6 @@ const Input: FC<Props> = (props) => {
         placeholder={props.placeholder}
         onChange={handleChange}
       />
-      <FetchFeedbacksData criteria={criteria} />
     </div>
   );
 };
