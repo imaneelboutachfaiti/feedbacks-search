@@ -14,7 +14,7 @@ const Input: FC<Props> = (props) => {
 
   return (
     <div>
-      <input
+      <input className="Search-field"
         {...props}
         placeholder={props.placeholder}
         onChange={handleChange}

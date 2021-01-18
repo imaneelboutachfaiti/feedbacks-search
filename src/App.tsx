@@ -9,55 +9,54 @@ import smartPhone from "./Components/Device/smartphone.svg";
 import monitor from "./Components/Device/monitor.svg";
 
 function App() {
-  const [criteria, setCriteria] = useState<null | string>(null);
+  const [criteria, setCriteria] = useState<string>("");
   const [ratings, setRatings] = useState<number[]>([]);
-  const [device, setDevice] = useState('');
+  const [device, setDevice] = useState<"MOBILE" | "DESKTOP" | null>(null);
 
-  function clicked(rate: number) {
+  const onRatingClick = (rate: number) => {
     ratings.includes(rate)
       ? setRatings(ratings.filter((item) => item !== rate))
       : setRatings(ratings.concat(rate));
-  }
+  };
 
-  // function Checkdevice(type: string) {
-  //   setDevice(type);
-  // }
-
-  console.log(device);
   return (
     <div className="App">
       <Header />
       <div>
         <div className="filter-section">
-          <RatingButton
-            ratingValue={1}
-            onClick={clicked}
-            selected={ratings.includes(1)}
-          />
-          <RatingButton
-            ratingValue={2}
-            onClick={clicked}
-            selected={ratings.includes(2)}
-          />
-          <RatingButton
-            ratingValue={3}
-            onClick={clicked}
-            selected={ratings.includes(3)}
-          />
-          <RatingButton
-            ratingValue={4}
-            onClick={clicked}
-            selected={ratings.includes(4)}
-          />
-          <RatingButton
-            ratingValue={5}
-            onClick={clicked}
-            selected={ratings.includes(5)}
-          />
-          <Device imgUrl={smartPhone} type="Mobile" onClick={setDevice} />
-          <Device imgUrl={monitor} type="Desktop" onClick={setDevice} />
+          <Input onChange={setCriteria} placeholder="Search here!" />
+          <div className="ratings">
+            <RatingButton
+              ratingValue={1}
+              onClick={onRatingClick}
+              selected={ratings.includes(1)}
+            />
+            <RatingButton
+              ratingValue={2}
+              onClick={onRatingClick}
+              selected={ratings.includes(2)}
+            />
+            <RatingButton
+              ratingValue={3}
+              onClick={onRatingClick}
+              selected={ratings.includes(3)}
+            />
+            <RatingButton
+              ratingValue={4}
+              onClick={onRatingClick}
+              selected={ratings.includes(4)}
+            />
+            <RatingButton
+              ratingValue={5}
+              onClick={onRatingClick}
+              selected={ratings.includes(5)}
+            />
+          </div>
+          <div className="devices">
+            <Device imgUrl={smartPhone} type="MOBILE" onClick={setDevice} />
+            <Device imgUrl={monitor} type="DESKTOP" onClick={setDevice} />
+          </div>
         </div>
-        <Input onChange={setCriteria} placeholder="Search here!" />
       </div>
       <table>
         <tr className="table-space ">
@@ -68,7 +67,11 @@ function App() {
           <th>Device</th>
         </tr>
         <tbody>
-          <FetchFeedbacksData criteria={criteria} ratings={ratings} device={device} />
+          <FetchFeedbacksData
+            criteria={criteria}
+            ratings={ratings}
+            device={device}
+          />
         </tbody>
       </table>
     </div>

@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
-import { isMobile } from "./FeedBacksData";
+import { getDeviceType, isMobile } from "./FeedBacksData";
 
 interface feedbacks {
   rating: number;
@@ -11,6 +11,7 @@ interface feedbacks {
   public_id: string;
   creation_date: number;
 }
+
 interface computed_browser {
   Platform: string;
   Browser: string;
@@ -22,10 +23,11 @@ interface browser {
 }
 
 interface Props {
-  criteria: null | string;
+  criteria: string;
   ratings: number[];
-  device :string;
+  device: "MOBILE" | "DESKTOP" | null;
 }
+
 const FetchFeedbacksData: FC<Props> = (props) => {
   const [feedbackData, setFeedbackData] = useState<feedbacks[]>([]);
 
@@ -40,14 +42,24 @@ const FetchFeedbacksData: FC<Props> = (props) => {
     const jsonData = await response.json();
     setFeedbackData(jsonData.items);
   };
-  const criteriaFilter = props.criteria === null ? "" : props.criteria;
+
   const listItems = feedbackData
-    .filter(
-      (feedback) =>
-        feedback.comment.includes(criteriaFilter) &&
-        (props.ratings?.includes(feedback.rating) || props.ratings.length === 0) && 
-      ( isMobile(props.device)? feedback.browser.userAgent.includes(props.device) : (!feedback.browser.userAgent.includes(props.device)) 
-    ) || props.device ==='')
+    .filter((feedback) => {
+      const searchCriteria = props.criteria
+        ? feedback.comment.includes(props.criteria)
+        : true;
+
+      const rating =
+        props.ratings.length > 0
+          ? props.ratings.includes(feedback.rating)
+          : true;
+
+      const deviceType = props.device
+        ? props.device === getDeviceType(feedback.browser.userAgent)
+        : true;
+
+      return searchCriteria && rating && deviceType;
+    })
     .map((feedback) => (
       <tr key={feedback.creation_date} className="table-space">
         <td>{feedback.rating}</td>

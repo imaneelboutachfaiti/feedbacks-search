@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import "./Header.css";
-import dashboardLogo from './dashboard.svg';
+import dashboardLogo from './speedometer.png';
 
 const Header: FC = () => {
   return (

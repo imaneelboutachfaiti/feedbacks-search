@@ -1,11 +1,10 @@
-import { type } from "os";
-import React, { FC } from "react";
+import { FC } from "react";
 import "./Device.css";
 
 interface props {
   imgUrl: string;
-  type: string;
-  onClick: (value: string) => void;
+  type: "MOBILE" | "DESKTOP";
+  onClick: (value: "MOBILE" | "DESKTOP") => void;
 }
 
 const Device: FC<props> = (props) => {

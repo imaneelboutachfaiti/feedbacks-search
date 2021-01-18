@@ -1,5 +1,13 @@
 .selected-rate {
-  background-color: salmon;
+  background-color: #F53838;
+}
+
+.Rating-button {
+  border-radius: 50px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: medium;
+  outline: none;
 }
 
 
