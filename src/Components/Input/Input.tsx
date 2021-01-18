@@ -4,7 +4,7 @@ import FetchFeedbacksData from "../Data/FetchFeedbacksData";
 
 interface Props {
   placeholder?: string;
-  onChange: (value: '' | string) => void
+  onChange: (value: "" | string) => void;
 }
 
 const Input: FC<Props> = (props) => {
@@ -14,7 +14,9 @@ const Input: FC<Props> = (props) => {
 
   return (
     <div>
-      <input className="Search-field"
+      <input
+        type="search"
+        className="Search-field"
         {...props}
         placeholder={props.placeholder}
         onChange={handleChange}

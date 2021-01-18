@@ -61,8 +61,10 @@ const FetchFeedbacksData: FC<Props> = (props) => {
       return searchCriteria && rating && deviceType;
     })
     .map((feedback) => (
-      <tr key={feedback.creation_date} className="table-space">
-        <td>{feedback.rating}</td>
+      <tr key={feedback.creation_date}>
+        <td>
+          <div className="rate">{feedback.rating}</div>
+        </td>
         <td>{feedback.comment}</td>
         <td>{feedback.computed_browser.Platform}</td>
         <td>

@@ -14,7 +14,7 @@ const RatingButton: FC<props> = (props) => {
 
   const className = props.selected ? " selected-rate" : "";
   return (
-    <button className={"Rating-button"+className} onClick={handleclick}>
+    <button className={"Rating-button" + className} onClick={handleclick}>
       {props.ratingValue}
     </button>
   );

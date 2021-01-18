@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div>
+      <div className ="main-content">
         <div className="filter-section">
           <Input onChange={setCriteria} placeholder="Search here!" />
           <div className="ratings">
@@ -59,14 +59,16 @@ function App() {
         </div>
       </div>
       <table>
-        <tr className="table-space ">
+        <thead className="table-header">
+          <tr>
           <th>Rating</th>
           <th>Comment</th>
           <th>platform</th>
           <th>Browser</th>
           <th>Device</th>
-        </tr>
-        <tbody>
+          </tr>
+        </thead>
+        <tbody className="table-content">
           <FetchFeedbacksData
             criteria={criteria}
             ratings={ratings}

@@ -1,3 +1,13 @@
-.Search-field::placeholder {
-    color: #F53838;
+.Search-field {
+  font-size: small;
+  opacity: 0.8;
+  padding: 7px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.Search-field:focus {
+  outline: none;
+  border: 2px solid rgb(238, 109, 120);
+  box-shadow: 0 0 5px rgb(200, 77, 89, 1);
 }
