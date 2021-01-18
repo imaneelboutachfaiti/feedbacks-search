@@ -1,0 +1,9 @@
+.device {
+  color: transparent;
+  width: max-content;
+  padding: 0;
+  width: 30px;
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+}

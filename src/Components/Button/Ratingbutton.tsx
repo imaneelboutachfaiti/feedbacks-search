@@ -1,20 +1,22 @@
 import React, { FC, Fragment, useState } from "react";
-import FetchFeedbacksData from "../Data/FetchFeedbacksData";
+import "./RatingButton.css";
 
 interface props {
   ratingValue: number;
-  onClick: (value: number) => void
+  onClick: (value: number) => void;
+  selected: boolean;
 }
 
 const RatingButton: FC<props> = (props) => {
- 
-const handleclick = () => {
-   props.onClick(props.ratingValue);
-};
+  const handleclick = () => {
+    props.onClick(props.ratingValue);
+  };
+
+  const className = props.selected ? "selected-rate" : "";
   return (
-    <Fragment>
-      <button onClick={handleclick}>{props.ratingValue}</button>
-    </Fragment>
+    <button className={className} onClick={handleclick}>
+      {props.ratingValue}
+    </button>
   );
 };
 

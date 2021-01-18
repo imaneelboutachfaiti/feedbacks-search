@@ -23,7 +23,8 @@ interface browser {
 
 interface Props {
   criteria: null | string;
-  rate: null | number;
+  ratings: number[];
+  device :string;
 }
 const FetchFeedbacksData: FC<Props> = (props) => {
   const [feedbackData, setFeedbackData] = useState<feedbacks[]>([]);
@@ -44,8 +45,9 @@ const FetchFeedbacksData: FC<Props> = (props) => {
     .filter(
       (feedback) =>
         feedback.comment.includes(criteriaFilter) &&
-        (feedback.rating === props.rate || props.rate === null)
-    )
+        (props.ratings?.includes(feedback.rating) || props.ratings.length === 0) && 
+      ( isMobile(props.device)? feedback.browser.userAgent.includes(props.device) : (!feedback.browser.userAgent.includes(props.device)) 
+    ) || props.device ==='')
     .map((feedback) => (
       <tr key={feedback.creation_date} className="table-space">
         <td>{feedback.rating}</td>
