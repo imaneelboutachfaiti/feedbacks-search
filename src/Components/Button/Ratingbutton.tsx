@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState } from "react";
+import  { FC } from "react";
 import "./RatingButton.css";
 
 interface props {

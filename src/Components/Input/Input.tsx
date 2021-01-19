@@ -1,6 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "./Input.css";
-import FetchFeedbacksData from "../Data/FetchFeedbacksData";
 
 interface Props {
   placeholder?: string;
