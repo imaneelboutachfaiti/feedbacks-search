@@ -52,8 +52,18 @@ function App() {
           />
         </div>
         <div className="devices">
-          <Device imgUrl={smartPhone} type="MOBILE" onClick={setDevice} />
-          <Device imgUrl={monitor} type="DESKTOP" onClick={setDevice} />
+          <Device
+            imgUrl={smartPhone}
+            type="MOBILE"
+            onClick={setDevice}
+            selected={device == "MOBILE"}
+          />
+          <Device
+            imgUrl={monitor}
+            type="DESKTOP"
+            onClick={setDevice}
+            selected={device == "DESKTOP"}
+          />
         </div>
       </div>
       <table>
