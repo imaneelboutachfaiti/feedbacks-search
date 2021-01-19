@@ -1,5 +1,6 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { getDeviceType, isMobile } from "./FeedBacksData";
+import "./FeedbackData.css";
 
 interface feedbacks {
   rating: number;
@@ -63,7 +64,7 @@ const FetchFeedbacksData: FC<Props> = (props) => {
     .map((feedback) => (
       <tr key={feedback.creation_date}>
         <td>
-          <div className="rate">{feedback.rating}</div>
+          <button className="rate">{feedback.rating}</button>
         </td>
         <td>{feedback.comment}</td>
         <td>{feedback.computed_browser.Platform}</td>

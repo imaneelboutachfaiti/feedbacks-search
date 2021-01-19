@@ -1,0 +1,6 @@
+.rate {
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: powderblue;
+  border: none;
+}
