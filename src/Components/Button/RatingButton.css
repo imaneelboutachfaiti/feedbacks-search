@@ -4,9 +4,11 @@
 }
 
 .Rating-button {
-  border-radius: 50px;
+  border-radius: 50%;
   border: 2px solid transparent;
   cursor: pointer;
   outline: none;
   font-size: small;
+  width: 25px;
+  height: 25px;
 }

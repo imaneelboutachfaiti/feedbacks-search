@@ -1,0 +1,15 @@
+.pagination-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  column-gap: 30px;
+}
+
+.pagination-button {
+  background-color: powderblue;
+  font-size: small;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

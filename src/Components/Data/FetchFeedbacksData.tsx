@@ -27,6 +27,7 @@ interface Props {
   criteria: string;
   ratings: number[];
   device: "MOBILE" | "DESKTOP" | null;
+  currentPage: number;
 }
 
 const FetchFeedbacksData: FC<Props> = (props) => {
@@ -44,6 +45,19 @@ const FetchFeedbacksData: FC<Props> = (props) => {
     setFeedbackData(jsonData.items);
   };
 
+  let startCount;
+
+  switch (props.currentPage) {
+    case 1:
+      startCount = 0;
+      break;
+    case 2:
+      startCount = 10;
+      break;
+    default:
+      startCount = (props.currentPage - 1) * 10;
+      break;
+  }
   const listItems = feedbackData
     .filter((feedback) => {
       const searchCriteria = props.criteria
@@ -61,6 +75,7 @@ const FetchFeedbacksData: FC<Props> = (props) => {
 
       return searchCriteria && rating && deviceType;
     })
+    .slice(startCount, startCount + 10)
     .map((feedback) => (
       <tr key={feedback.creation_date}>
         <td>

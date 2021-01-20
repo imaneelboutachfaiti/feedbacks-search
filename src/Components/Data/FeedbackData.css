@@ -3,4 +3,6 @@
   pointer-events: none;
   background-color: powderblue;
   border: none;
+  height: 30px;
+  width: 30px;
 }
