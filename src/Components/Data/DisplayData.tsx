@@ -58,6 +58,12 @@ export const DisplayData: FC<props> = (props) => {
 
   return (
     <Fragment>
+      <Pagination
+        currentPage={props.currentPage}
+        TotalPages={Math.floor(props.listItems.length / 10)}
+        onNext={onNext}
+        onPrevious={onPrevious}
+      />
       <table className="table-area">
         <thead className="table-header">
           <tr>

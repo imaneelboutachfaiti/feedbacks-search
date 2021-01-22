@@ -37,10 +37,16 @@ export const FetchFeedbacksData: FC<Props> = (props) => {
   useEffect(() => {
     FetchFeedbacks();
   }, []);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [props.criteria, props.ratings, props.device]);
+
   const FetchFeedbacks = async () => {
     const response = await fetch(
       "https://static.usabilla.com/recruitment/apidemo.json"
     );
+
     const jsonData = await response.json();
     setFeedbackData(jsonData.items);
   };
