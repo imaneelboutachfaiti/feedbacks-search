@@ -2,9 +2,9 @@ import { FC } from "react";
 import "./Pagination.css";
 
 interface props {
-  currentPage: number;
-  totalPages: number;
   onPrevious: () => void;
+  currentPage: number;
+  TotalPages: number;
   onNext: () => void;
 }
 
@@ -15,7 +15,8 @@ export const Pagination: FC<props> = (props) => {
         previous
       </button>
       <div>
-        <span>{props.currentPage}</span>/<span>{props.totalPages}</span>
+        <span>{props.currentPage}</span>/
+        <span>{props.TotalPages !== 0 ? props.TotalPages : "1"}</span>
       </div>
       <button className="pagination-button" onClick={props.onNext}>
         Next

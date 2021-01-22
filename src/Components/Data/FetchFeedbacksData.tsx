@@ -1,6 +1,7 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { getDeviceType, isMobile } from "./FeedBacksData";
 import "./FeedbackData.css";
+import { DisplayData } from "./DisplayData";
 
 interface feedbacks {
   rating: number;
@@ -27,16 +28,15 @@ interface Props {
   criteria: string;
   ratings: number[];
   device: "MOBILE" | "DESKTOP" | null;
-  currentPage: number;
 }
 
-const FetchFeedbacksData: FC<Props> = (props) => {
+export const FetchFeedbacksData: FC<Props> = (props) => {
   const [feedbackData, setFeedbackData] = useState<feedbacks[]>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
   useEffect(() => {
     FetchFeedbacks();
   }, []);
-
   const FetchFeedbacks = async () => {
     const response = await fetch(
       "https://static.usabilla.com/recruitment/apidemo.json"
@@ -44,55 +44,27 @@ const FetchFeedbacksData: FC<Props> = (props) => {
     const jsonData = await response.json();
     setFeedbackData(jsonData.items);
   };
+  const listItems = feedbackData.filter((feedback) => {
+    const searchCriteria = props.criteria
+      ? feedback.comment.includes(props.criteria)
+      : true;
 
-  let startCount;
+    const rating =
+      props.ratings.length > 0 ? props.ratings.includes(feedback.rating) : true;
 
-  switch (props.currentPage) {
-    case 1:
-      startCount = 0;
-      break;
-    case 2:
-      startCount = 10;
-      break;
-    default:
-      startCount = (props.currentPage - 1) * 10;
-      break;
-  }
-  const listItems = feedbackData
-    .filter((feedback) => {
-      const searchCriteria = props.criteria
-        ? feedback.comment.includes(props.criteria)
-        : true;
+    const deviceType = props.device
+      ? props.device === getDeviceType(feedback.browser.userAgent)
+      : true;
 
-      const rating =
-        props.ratings.length > 0
-          ? props.ratings.includes(feedback.rating)
-          : true;
-
-      const deviceType = props.device
-        ? props.device === getDeviceType(feedback.browser.userAgent)
-        : true;
-
-      return searchCriteria && rating && deviceType;
-    })
-    .slice(startCount, startCount + 10)
-    .map((feedback) => (
-      <tr key={feedback.creation_date}>
-        <td>
-          <button className="rate">{feedback.rating}</button>
-        </td>
-        <td>{feedback.comment}</td>
-        <td>{feedback.computed_browser.Platform}</td>
-        <td>
-          {feedback.computed_browser.Browser +
-            " " +
-            feedback.computed_browser.Version}
-        </td>
-        <td>{isMobile(feedback.browser.userAgent) ? "Mobile" : "Desktop"}</td>
-      </tr>
-    ));
-
-  return <Fragment>{listItems}</Fragment>;
+    return searchCriteria && rating && deviceType;
+  });
+  return (
+    <Fragment>
+      <DisplayData
+        listItems={listItems}
+        setPageNumber={setPageNumber}
+        currentPage={pageNumber}
+      />
+    </Fragment>
+  );
 };
-
-export default FetchFeedbacksData;
